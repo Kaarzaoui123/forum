@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Messages Page</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand text-info" href="#">{{ discussion.title }}</a>
+    {% if 'username' in session %}
+    <a href="/logout" class="btn btn-primary">logout</a>
+    {% else %}
+    <a href="/login" class="btn btn-primary">login</a>
+    {% endif %}
+	</nav>
+	{% if 'username' in session %}
+	<form method="POST" action="/messages/{{ discussion.id }}/">
+		<h3>add message</h3>
+        <label for="message">message</label><br>
+        <input type="text" class="form-control mx-auto " name="message" placeholder="Enter message"><br>
+        <button type="submit" class="btn btn-outline-primary  btn-block">save</button>
+    </form>
+    {% endif %}
+
+	<div class="row align-items-center">	  
+		<div class="col-sm-8 offset-2">  
+		  <ul>
+		    {% for message in messages %}
+		    <div class="card mt-3 mb-3">
+		       	<div class="card-body">
+		            <p class="card-text">{{ message.text }}</p>
+		        </div>
+		        <div class="card-footer text-muted">
+		        from: <a href="/profile/{{ message.user.id }}/">{{ message.user.username }}</a>   --------  date: {{ message.date }}
+		    	</div>
+		    </div>
+		    {% endfor %}
+		  </ul>
+		</div>
+	</div>
+
+</body>
+</html>
+
+		      
+		    	
+

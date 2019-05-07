@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile Page</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand text-info" href="#">Profile</a>
+    {% if 'username' in session %}
+    <a href="/logout" class="btn btn-primary">logout</a>
+    {% else %}
+    <a href="/login" class="btn btn-primary">login</a>
+    {% endif %}
+	</nav>
+	<div class="row align-items-center">	  
+		<div class="col-sm-8 offset-2">  
+		  <ul>
+		  	
+		  	<h3>Username:{{ user.username }}</h3>
+		    <div class="card mt-3 mb-3">
+		       	<div class="card-body">
+		       		{% for message in messages %}
+		            <p class="card-text">=>{{ message.text }}</p>
+		            {% endfor %}
+		        </div>
+		    </div>
+		  </ul>
+		{% with error_messages = get_flashed_messages() %}
+        {% if error_messages %}
+           <ul>
+            {% for error_message in error_messages %}
+            <li>{{ error_message }}</li>
+            {% endfor %}
+        	</ul>
+        {% endif %}
+      	{% endwith %}
+		  {% if 'username' in session and session['username'] == user.username %}
+		  <form method="POST" action="/change_password/{{ user.id }}/">
+		  	<h3>Change password</h3>
+        	<label>Old password</label>
+        	<input type="password" class="form-control mx-auto " name="old_password"  placeholder="Enter old password"><br>
+        	<label>New password</label>
+        	<input type="password" class="form-control mx-auto " name="new_password"  placeholder="Enter new password"><br>
+        	<button type="submit" class="btn btn-outline-primary  btn-block">save</button>
+		  </form>
+		  <hr>
+		  <form method="POST" action="/change_username/{{ user.id }}/">
+		  	<h3>Change username</h3>
+        	<label>New username</label>
+        	<input type="text" class="form-control mx-auto " name="new_username"  placeholder="Enter new username"><br>
+        	<button type="submit" class="btn btn-outline-primary  btn-block">save</button>
+		  </form>
+		  {% endif %}
+		</div>
+	</div>
+
+</body>
+</html>
+
+		      
+		    	
+
