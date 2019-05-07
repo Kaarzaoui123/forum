@@ -5,6 +5,7 @@ from utils import password_check
 
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
+#just comment
 
 @app.route('/')
 def index():
@@ -126,71 +127,6 @@ def change_username(user_id):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# @app.route('/profile/<int:user_id>/',methods = ['GET', 'POST'])
-# def profile(user_id):
-#     user = User.query.filter_by(id=user_id).first()
-#     messages = Message.query.filter_by(user_id=user_id).order_by(Message.date.desc()).all()
-#     if 'username' in session and session['username'] == user.username :
-#         if request.method == 'POST':
-#             if 'new_username' in request.form:
-#                 new_username = request.form['new_username']
-#                 shearched_user = User.query.filter_by(username=new_username).first()
-#                 if shearched_user == None:
-#                     user.username = new_username
-#                     flash('Username change with succes')
-#                     db.session.commit()
-#                     session['username'] = new_username
-#                     return redirect(request.path,code=302)
-#             elif 'old_password' in request.form:
-#                 old_password = request.form['old_password']
-#                 new_password = request.form['new_password']
-#                 user = User.query.filter_by(
-#                     username=session['username'],
-#                     password=old_password
-#                 ).first()
-#                 if user != None:
-#                     if password_check(new_password) and new_password != old_password:
-#                         user.password = new_password
-#                         flash('Password change with succes')
-#                         db.session.commit()
-#                     else:
-#                         flash('new password is too weak')
-#             return redirect(request.path,code=302)
-                
-#     return render_template('profile.html',user=user,messages=messages)
 
 
 
